@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul,body{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .bannerbox{
+            width: 100%;
+            height: 500px;
+            /*background: #e8e8e8;*/
+            /*transition: all 1s;*/
+        }
+        .bannerinner{
+            width: 1230px;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .banner{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .banner li{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        .banner li.active{
+            z-index:1;
+            display: block;
+        }
+        .banner li a{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .dianbox{
+            width: 120px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            margin-left: -50px;
+            bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+        }
+        .dianbox li{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+        }
+        .dianbox li.active{
+            background: red;
+        }
+        .prev,.next{
+            width: 30px;
+            height: 50px;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="bannerbox">
+        <div class="bannerinner">
+            <ul class="banner">
+                <li class="active"><a href="#"><img src="banner1.jpg" alt=""></a></li>
+                <li><a href="#"><img src="banner2.jpg" alt=""></a></li>
+                <li><a href="#"><img src="banner3.jpg" alt=""></a></li>
+            </ul>
+            <ul class="dianbox">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="prev">&lt</div>
+            <div class="next">&gt</div>
+        </div>
+    </div>
+</body>
+<script src="1.11.js"></script>
+<script>
+    $(".dianbox li").click(function () {
+        $(this).addClass("active").siblings().filter(".active").removeClass("active");
+
+        var index=$(this).index();
+        $(".banner li").fadeOut(500).eq(index).fadeIn(500);
+        num=index;
+    })
+    var st=setInterval(move,3000);
+    var num=0;
+    function move() {
+        num++;
+        if(num===$(".dianbox li").length){
+            num=0;
+        }
+        $(".dianbox li").filter(".active").removeClass("active").end().eq(num).addClass("active");
+        $(".banner li").fadeOut(500).eq(num).fadeIn(500);
+    }
+//    $(".bannerbox").mouseover(function () {
+//        clearInterval(st);
+//    })
+//    $(".bannerbox").mouseout(function () {
+//        st=setInterval(move,3000)
+//    })
+    $(".bannerbox").hover(function(){
+        clearInterval(st);
+    },function(){
+        st=setInterval(move,3000);
+    })
+</script>
+</html>

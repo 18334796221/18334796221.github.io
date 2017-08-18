@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 1230px;
+            height: 500px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <div><img data-src="banner1.jpg" alt=""></div>
+    <div><img data-src="banner2.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner1.jpg" alt=""></div>
+    <div><img data-src="banner2.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner1.jpg" alt=""></div>
+    <div><img data-src="banner2.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+    <div><img data-src="banner3.jpg" alt=""></div>
+</body>
+<script src="1.11.js"></script>
+<script>
+
+//    let imgs=document.images;
+//    window.addEventListener("scroll",function () {
+//        let st=document.body.scrollTop;
+//        Array.from(imgs).forEach(function (ele) {
+//            if (st+window.innerHeight>getPosition(ele)){
+//                ele.src=ele.getAttribute("data-src");
+//            }
+//        });
+//    })
+//
+//    function getPosition(obj){
+//        let ot=obj.offsetTop;
+//        let parent=obj.offsetParent;//有定位属性的父元素
+//        while (parent!==null&&parent.nodeName!=="BODY"){
+//            ot+=parent.offsetTop;
+//            parent=parent.offsetParent;
+//        }
+//        return ot;
+//    }
+
+    var imgs=$("img");
+    imgs.each(function (index,ele) {
+        var ot=$(ele).offset().top;
+        if(ot<$(window).height()){
+            $(ele).attr("src",function () {
+                return $(ele).attr("data-src");
+            })
+        }
+    })
+    $(window).scroll(function () {
+        var st=$(this).scrollTop();
+        imgs.filter(function () {
+            var r=$(this).attr("src");
+            return !r;
+        })
+        .each(function (index,ele) {
+            if($(ele).offset().top<st+$(window).height()){
+                $(ele).attr("src",function () {
+                    return $(ele).attr("data-src");
+                })
+            }
+        })
+    })
+
+</script>
+</html>
