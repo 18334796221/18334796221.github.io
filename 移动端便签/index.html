@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="box">
+        <div class="top">
+            <input type="button" value="全不选" class="fuxuan none">
+            <input type="button" value="全选" class="fuxuan all">
+            <h3>便签</h3>
+            <i class="iconfont addsubmit">&#xe636;</i>
+        </div>
+        <div class="main">
+            <div class="container">
+                <div class="add">
+                    <h3>添加新的事项</h3>
+                    <label>
+                        <textarea id="text"></textarea>
+                        <div class="notice"><span>00</span>/60</div>
+                    </label>
+                    <input type="button" id="submit" value="完成">
+                </div>
+                <div class="wait item">
+                    <h3>未完成事项</h3>
+                    <div class="line"></div>
+                    <ul></ul>
+                </div>
+                <div class="done item">
+                    <h3>已完成事项</h3>
+                    <div class="line"></div>
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+        <ul class="bottom">
+            <li class="searchwait iconfont">&#xe603;</li>
+            <li class="searchdone iconfont">&#xe647;</li>
+            <li class="addsubmit iconfont">&#xe605;</li>
+            <li class="movedone iconfont">&#xe60a;</li>
+            <li class="clearbtn iconfont">&#xe619;</li>
+        </ul>
+    </div>
+
+</body>
+<script src="js/rem.js"></script>
+<script src="js/1.11.js"></script>
+<script src="js/main.js"></script>
+</html>

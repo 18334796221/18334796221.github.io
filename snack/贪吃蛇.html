@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .btn{
+            width: 90px;
+            height: 45px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            z-index: 99;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn div{
+            width: 43px;
+            height: 45px;
+            float: left;
+        }
+        .top{
+            width: 800px;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url("top.png") no-repeat;
+            background-size: 800px 40px;
+            z-index: 1;
+        }
+        .top .show{
+            float: left;
+            margin: 0 20px;
+        }
+        .top .show div{
+            float: right;
+            width: 60px;
+            height: 20px;
+            background: url("scro.png");
+            background-size: 60px 20px;
+        }
+        .top .show div span{
+            display: inline-block;
+            margin-left: 30px;
+            color: #fff;
+        }
+        .scene{
+            width: 800px;
+            height: 480px;
+            background: #01aa35;
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+        .home{
+            width: 800px;
+            height: 500px;
+            background: url("1.jpg") no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+        }
+        .begin{
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            cursor: pointer;
+        }
+        .begin img{
+            border-radius: 10px;
+        }
+        .block{
+            width: 40px;
+            height: 40px;
+            /*border: 1px solid #17d54c;*/
+            box-sizing: border-box;
+            float: left;
+        }
+        .snackbody{
+            background: url("4.png");
+            background-size: contain;
+        }
+        .snackhead{
+            background: url("3.png");
+            background-size: contain;
+        }
+        .snackheadr{
+            background: url("3.png");
+            background-size: cover;
+            transform: rotate(90deg);
+        }
+        .snackheadl{
+            background: url("3.png");
+            background-size: cover;
+            transform: rotate(-90deg);
+        }
+        .snackheadt{
+            background: url("3.png");
+            background-size: cover;
+        }
+        .snackheadb{
+            background: url("3.png");
+            background-size: cover;
+            transform: rotate(180deg);
+        }
+        .food{
+            background: url("2.png");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <div class="top">
+            <div class="show">得分 <div class="scro"><span>0</span></div></div>
+            <div class="show">关卡 <div class="state"><span>1</span></div></div>
+        </div>
+        <div class="btn">
+            <div class="continue"><img src="continue.png" alt="" width="43" height="45"></div>
+            <div class="stop"><img src="stop.png" alt="" width="43" height="45"></div>
+        </div>
+        <div>
+            <div class="scene"></div>
+            <div class="home">
+                <div class="begin"><img src="begin.png" alt="" width="140" height="60"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="jquery.min.js"></script>
+<script>
+    var flag=true;
+    var scronum=0;
+    var statenum=1;
+    var speed=3;
+    var scro=$(".scro span");
+
+    for(var i=0;i<12;i++){
+        for(var j=0;j<20;j++){
+            $("<div></div>").addClass("block").attr("id",j+"-"+i).appendTo(".scene");
+        }
+    }//创建场景
+
+    var snackArr=[{x:0,y:0},{x:1,y:0},{x:2,y:0}];
+    var snackHead=snackArr[snackArr.length-1];
+    function drawSnack() {
+        $(".snackbody").removeClass("snackbody");
+        $(".snackheadr").removeClass("snackheadr");
+        $(".snackheadl").removeClass("snackheadl");
+        $(".snackheadt").removeClass("snackheadt");
+        $(".snackheadb").removeClass("snackheadb");
+        $.each(snackArr,function (index,ele) {
+            $("#"+ele.x+"-"+ele.y).addClass("snackbody");
+        });
+//        $("#"+snackHead.x+"-"+snackHead.y).addClass("snackhead");
+        switch(dir){
+            case "r": $("#"+snackHead.x+"-"+snackHead.y).addClass("snackheadr");break;
+            case "l": $("#"+snackHead.x+"-"+snackHead.y).addClass("snackheadl");break;
+            case "t": $("#"+snackHead.x+"-"+snackHead.y).addClass("snackheadt");break;
+            case "b": $("#"+snackHead.x+"-"+snackHead.y).addClass("snackheadb");break;
+        }
+    }
+    drawSnack();//画蛇
+
+    var dir="r";
+    function move() {
+        switch(dir){
+            case "r": snackHead={x:snackHead.x+1,y:snackHead.y};
+                break;
+            case "t": snackHead={x:snackHead.x,y:snackHead.y-1};
+                break;
+            case "l": snackHead={x:snackHead.x-1,y:snackHead.y};
+                break;
+            case "b": snackHead={x:snackHead.x,y:snackHead.y+1};
+                break;
+        }
+        snackArr.push(snackHead);
+
+        var head=$("#"+snackHead.x+"-"+snackHead.y);
+//        console.log(head.length);
+
+        if(head.hasClass("snackbody")||head.length==0){
+            alert(`游戏结束，得分为${scronum}`);
+            clearInterval(st);
+            location.reload();
+            flag=true;
+        }
+
+        if(head.hasClass("food")){
+            head.removeClass("food");
+            scronum++;
+            scro.html(scronum);
+            createFood();
+            if(scronum>0&&scronum%5===0){
+                statenum++;
+                $(".state span").html(statenum);
+                speed++;
+                st=setInterval(move,400-speed);
+            }
+        }else{
+            snackArr.shift();
+        }
+        drawSnack();
+    }
+    var st;
+    $(".begin").click(function () {
+        $(".home").css("display","none");
+        st=setInterval(move,400);//蛇移动
+    });
+
+
+    $(document).keydown(function (e) {
+        switch(e.keyCode){
+            case 65:
+            case 37: dir="l";
+                break;
+            case 87:
+            case 38: dir="t";
+                break;
+            case 68:
+            case 39: dir="r";
+                break;
+            case 83:
+            case 40: dir="b";
+                break;
+        }
+    })//转变方向
+
+    function createFood() {
+        do{
+            var rx=Math.floor(Math.random()*20);
+            var ry=Math.floor(Math.random()*12);
+        }while($("#"+rx+"-"+ry).hasClass("snackbody"));
+        $("#"+rx+"-"+ry).addClass("food");
+    }
+    createFood();//创建食物
+
+    $(".stop").click(function () {
+        clearInterval(st);
+    });
+    $(".continue").click(function () {
+        st=setInterval(move,400-speed);
+    });
+</script>
+</html>

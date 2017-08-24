@@ -1,0 +1,242 @@
+body,ul,h3{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.3rem;
+    font-family: "Microsoft Yahei";
+}
+html,body{
+    width: 100%;
+    /*height: 100%;*/
+    overflow: hidden;
+    box-sizing: border-box;
+}
+input{
+    outline: none;
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('../font/iconfont.eot');
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../font/iconfont.woff') format('woff'),
+    url('../font/iconfont.ttf') format('truetype'),
+    url('../font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:0.3rem;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.box{
+    width: 100%;
+    height: auto;
+}
+.top{
+    height: 1.0rem;
+    background: coral;
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.0rem;
+    position: relative;
+}
+.top .fuxuan{
+    position: absolute;
+    top: 0.2rem;
+    left: 0.1rem;
+    width: 1.0rem;
+    height: 0.60rem;
+    border: none;
+    background: coral;
+    color: #fff;
+    font-size: 0.3rem;
+    border-radius: 0.10rem;
+    cursor: pointer;
+}
+.top h3{
+    position: absolute;
+    left: 3.3rem;
+    color: #fff;
+    font-size: 0.4rem;
+}
+.top i{
+    position: absolute;
+    right: 0.2rem;
+    color: #fff;
+    font-size: 0.4rem;
+}
+
+.main{
+    width: 100%;
+    height: 11rem;
+    background: #ffd7ad;
+    /*background: url("../img/1.jpg") no-repeat;*/
+    /*background-size: 100% 11rem;*/
+    position: relative;
+}
+.main .container{
+    width: 7rem;
+    height: 7rem;
+    background: #fff;
+    border: 0.01rem solid #4C4C4C;
+    border-radius: 0.2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.container .add{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+.container .add h3{
+    color: #c1c1a6;
+    font-size: 0.4rem;
+    margin: 0.18rem 0;
+    text-align: center;
+}
+.container .add label{
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 5.10rem;
+    height: 4.50rem;
+}
+.container .add textarea{
+    width: 5.00rem;
+    height: 4.50rem;
+    display: block;
+    resize: none;
+    font-size: 0.5rem;
+    position: relative;
+}
+.container .add .notice{
+    position: absolute;
+    color: #c1c1c1;
+    right: 0.10rem;
+    bottom: 0.03rem;
+}
+.container .add #submit{
+    margin-top: 0.30rem;
+    width: 1.00rem;
+    height: 0.45rem;
+    font-size: 0.26rem;
+    background: coral;
+    color: #fff;
+    border-radius: 0.10rem;
+}
+.container .wait,.done{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.container .item h3{
+    font-size: 0.4rem;
+    font-weight: normal;
+    margin: 0.4rem 0;
+    text-align: center;
+}
+.item .line{
+    width: 6.5rem;
+    margin: 0 auto;
+    height: 0.02rem;
+    background: #c1c1c1;
+}
+.item ul{
+    width: 6.5rem;
+    margin: 0 auto;
+    height: 6.5rem;
+}
+.item ul li{
+    width: 100%;
+    border-bottom: 0.02rem solid #c1c1c1;
+    padding: 0.03rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.item ul li:hover{
+    background: #ccc;
+}
+.item .checkbox{
+    float: left;
+    height: 0.8rem;
+}
+.item p{
+    float: left;
+    margin: 0;
+    padding-left: 0.03rem;
+    width: 2.5rem;
+    height: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.item time{
+    float: left;
+    width: 3.0rem;
+    height: 0.8rem;
+    font-size: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.item i.iconfont{
+    float: right;
+    /*height: 0.8rem;*/
+    margin: 0 0.10rem;
+    line-height: 0.8rem;
+    color: #000;
+    cursor: pointer;
+}
+.item i.active{
+    color: red;
+}
+
+.bottom{
+    height: 1.0rem;
+    line-height: 1.0rem;
+    font-size: 0.4rem;
+    padding: 0 0.3rem;
+    background: coral;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+.bottom li{
+    cursor: pointer;
+    float: left;
+    width: 1.0rem;
+    height: 100%;
+    color: #fff;
+    font-size: 0.6rem;
+    text-align: center;
+    line-height: 1.0rem;
+}
+.bottom li:first-child{
+    font-size: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

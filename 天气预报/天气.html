@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+        }
+        p,span{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 700px;
+            height: 560px;
+            margin: 0 auto;
+            background: url("2.jpg") no-repeat;
+            background-size: cover;
+            color: #fff;
+            position: relative;
+        }
+        section{
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        select{
+            width: 60px;
+            height: 30px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        time{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 150px;
+            height: 60px;
+        }
+        .nowdate{
+            width: 100%;
+            height: 30px;
+            text-align: center;
+        }
+        .nowweek{
+            width: 100%;
+            height: 30px;
+            text-align: center;
+        }
+        .air{
+            position: absolute;
+            width: 180px;
+            height: 40px;
+            top: 40px;
+            left: 5px;
+            font-size: 18px;
+            line-height: 40px;
+        }
+        .air span{
+            background: #AFDB00;
+            display: block;
+            float: right;
+            width: 90px;
+            height: 30px;
+            margin-top: 5px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .weather{
+            width: 100%;
+            height: 240px;
+            position: absolute;
+            top: 90px;
+            left: 0;
+            box-sizing: border-box;
+        }
+        .weather ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .weather ul li{
+            border-left: 1px solid rgba(255,255,255,0.3);
+            float: left;
+            width: 130px;
+            height: 100%;
+            text-align: center;
+        }
+        .weather ul li.active{
+            background: rgba(255,255,255,0.1);
+        }
+        .weather ul li:first-child{
+            width: 180px;
+        }
+        .pc{
+            box-sizing: border-box;
+            width: 100%;
+            height: 80px;
+            padding: 12px 0;
+            line-height: 80px;
+            /*background: red;*/
+        }
+        .nowtem{
+            width: 100%;
+            height: 60px;
+            padding-top: 9px;
+            box-sizing: border-box;
+        }
+        .nowtem p{
+            width: 50%;
+            height: 42px;
+            box-sizing: border-box;
+            float: left;
+        }
+        .nowtem p:first-child{
+            font-size: 42px;
+            padding-right: 5px;
+            line-height: 42px;
+            font-weight: 500;
+            text-align: right;
+        }
+        .nowtem p:last-child{
+            text-align: left;
+            padding-left: 3px;
+        }
+        .nowtem p span{
+            display: block;
+            width: 100%;
+            height: 50%;
+            font-size: 14px;
+        }
+        .tem{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 10px;
+        }
+        .wea{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+        }
+        .wind{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+        }
+        .ntime{
+            width: 100%;
+            height: 60px;
+        }
+        .nweek{
+            width: 100%;
+            height: 25px;
+        }
+        .ndate{
+            width: 100%;
+            height: 30px;
+            color: rgba(255,255,255,0.5);
+        }
+        .hourly{
+            position: absolute;
+            top: 340px;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: rgba(255,255,255,0.1);
+        }
+        .templist{
+            width: 47px;
+            height: 150px;
+            margin-top: 15px;
+            padding-right: 3px;
+            text-align: right;
+        }
+        .templist span{
+            display: block;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .hourlist{
+            width: 600px;
+            height: 30px;
+            padding: 0 15px;
+            line-height: 30px;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        canvas{
+            /*background: red;*/
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <section>
+            选择省<select name="province" id="province"></select>
+            选择市<select name="city" id="city"></select>
+        </section>
+        <time>
+            <div class="nowdate"></div>
+            <div class="nowweek"></div>
+        </time>
+        <div class="air">空气质量 : <span></span></div>
+        <div class="weather">
+            <ul>
+                <li>
+                    <div class="pc" style="padding-top: 0"><img src="" alt=""></div>
+                    <div class="nowtem">
+                        <p></p>
+                        <p>
+                            <span></span>
+                            <span></span>
+                        </p>
+                    </div>
+                    <div class="tem"></div>
+                    <div class="wea"></div>
+                    <div class="wind"></div>
+                </li>
+                <li>
+                    <div class="ntime">
+                        <div class="nweek"></div>
+                        <div class="ndate"></div>
+                    </div>
+                    <div class="pc"><img src="" alt=""></div>
+                    <div class="tem"></div>
+                    <div class="wea"></div>
+                    <div class="wind"></div>
+                </li>
+                <li>
+                    <div class="ntime">
+                        <div class="nweek"></div>
+                        <div class="ndate"></div>
+                    </div>
+                    <div class="pc"><img src="" alt=""></div>
+                    <div class="tem"></div>
+                    <div class="wea"></div>
+                    <div class="wind"></div>
+                </li>
+                <li>
+                    <div class="ntime">
+                        <div class="nweek"></div>
+                        <div class="ndate"></div>
+                    </div>
+                    <div class="pc"><img src="" alt=""></div>
+                    <div class="tem"></div>
+                    <div class="wea"></div>
+                    <div class="wind"></div>
+                </li>
+                <li>
+                    <div class="ntime">
+                        <div class="nweek"></div>
+                        <div class="ndate"></div>
+                    </div>
+                    <div class="pc"><img src="" alt=""></div>
+                    <div class="tem"></div>
+                    <div class="wea"></div>
+                    <div class="wind"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="hourly">
+            <div class="templist">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="hourlist">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <!--<li></li>-->
+            </ul>
+            <canvas width="630" height="150"></canvas>
+        </div>
+    </div>
+</body>
+<script src="1.11.js"></script>
+<script>
+    var provinces=[];
+    var citys=[];
+    var data=[];
+    $.ajax({
+        url:"http://api.jisuapi.com/weather/city?appkey=4e38cd38e92b5cbc",
+        dataType:"jsonp",
+        success:function (r) {
+//            console.log(r)
+            data=r.result;
+            provinces=$.grep(data,function (v) {//筛选
+                if(v.parentid==="0"){
+                    return true;
+                }
+            });
+            console.log(provinces)
+            $.each(provinces,function (index,v) {
+                $("<option>").html(v.city).val(v.cityid).appendTo("#province");
+            })
+        }
+    });
+    $("#province").on("change blur",function () {
+        var id=$(this).val();
+        citys=$.grep(data,function (v) {
+            if(v.parentid===id){
+                return true;
+            }
+        });
+        console.log(citys);
+        $("#city").empty();
+        $.each(citys,function (index,v) {
+            $("<option>").html(v.city).val(v.cityid).appendTo("#city");
+        })
+    })
+    $("#city").on("change blur",function () {
+        var cityId=$(this).val();
+
+        $.ajax({
+            url:"http://api.jisuapi.com/weather/query",
+            data:{cityid:cityId,appkey:"4e38cd38e92b5cbc"},
+            dataType:"jsonp",
+            success:function (r) {
+                console.log(r);
+//                $("time").empty();
+                var r=r.result;
+                var daily=r.daily;
+                $(".nowdate").html(daily[0].date);
+                $(".nowweek").html(daily[0].week);
+                $(".air span").html(r.aqi.quality);//空气质量
+                $.each($(".weather ul li"),function (index,val) {
+                    $(this).mouseover(function () {
+                        $(this).addClass("active").siblings().removeClass("active");
+                    });
+                    $(this).find(".tem").html(daily[index].night.templow+"~"+daily[index].day.temphigh+"°C").parent().find(".wea").html(daily[index].day.weather).parent().find(".wind").html(daily[index].day.winddirect+daily[index].day.windpower).parent().find(".pc img").prop("src","天气图标/weathercn/"+daily[index].day.img+".png").parent().parent().find(".nweek").html(daily[index].week).parent().find(".ndate").html(daily[index].date.slice(5,7)+"月"+daily[index].date.slice(8,10)+"日")
+                });
+                $(".weather ul li:first-child .pc img").attr("src","天气图标/weathercn02/"+r.img+".png");
+                $(".nowtem p:first-child").html(r.temp);
+                $(".nowtem p:last-child span:first-child").html("°C");
+                $(".nowtem p:last-child span:last-child").html(r.hourly[0].weather+"(实时)");
+
+                var canvas=document.querySelector("canvas");
+                var cobj=canvas.getContext("2d");
+                console.log(cobj)
+                cobj.strokeStyle="rgba(255,255,255,0.5)";
+                cobj.clearRect(0,0,630,150);
+                cobj.beginPath();
+                for(var i=1;i<6;i++){
+                    cobj.moveTo(0,i*30);
+                    cobj.lineTo(630,i*30);
+                }
+                cobj.stroke();
+                $(".templist span").each(function (index,val) {
+                    $(this).html(38-6*index);
+                });
+                var hourly=r.hourly;
+                $(".hourlist li").each(function (index,val) {
+                    $(this).html(hourly[index*3].time.slice(0,-3)+"点");
+                });
+
+                cobj.beginPath();
+                cobj.moveTo(25,(38-hourly[0].temp)*5);
+                cobj.lineTo(110,(38-hourly[3].temp)*5);
+                cobj.lineTo(195,(38-hourly[6].temp)*5);
+                cobj.lineTo(280,(38-hourly[9].temp)*5);
+                cobj.lineTo(365,(38-hourly[12].temp)*5);
+                cobj.lineTo(450,(38-hourly[15].temp)*5);
+                cobj.lineTo(535,(38-hourly[18].temp)*5);
+                cobj.lineTo(620,(38-hourly[21].temp)*5);
+                cobj.stroke();
+
+                cobj.beginPath();
+                cobj.strokeStyle="rgba(255,255,255,0.8)";
+                cobj.lineWidth=2;
+                cobj.arc(25,(38-hourly[0].temp)*5,2,0,2*Math.PI);
+                cobj.arc(110,(38-hourly[3].temp)*5,2,0,2*Math.PI);
+                cobj.arc(195,(38-hourly[6].temp)*5,2,0,2*Math.PI);
+                cobj.arc(280,(38-hourly[9].temp)*5,2,0,2*Math.PI);
+                cobj.arc(365,(38-hourly[12].temp)*5,2,0,2*Math.PI);
+                cobj.arc(450,(38-hourly[15].temp)*5,2,0,2*Math.PI);
+                cobj.arc(535,(38-hourly[18].temp)*5,2,0,2*Math.PI);
+                cobj.arc(620,(38-hourly[21].temp)*5,2,0,2*Math.PI);
+                cobj.stroke();
+            }
+        });
+
+    });
+
+</script>
+
+</html>
